@@ -1,5 +1,6 @@
 from user import User
 from users_repo import UsersRepo
+from password_hasher import hash_password
 import random
 
 
@@ -13,8 +14,8 @@ class UsersService:
         for i in range(16):
             chars.append(random.choice(alphabet))
         pass_salt = "".join(chars)
-        user = User(email, '', pass_salt)
-        user.pass_hash = user.hash_password(password)
+        pass_hash = hash_password(password, pass_salt)
+        user = User(email, pass_hash, pass_salt)
         self.repo.create(user)
 
     def find(self, email):

@@ -11,7 +11,3 @@ class User:
         return User(document.get('email', None),
                     document.get('pass_hash', None),
                     document.get('pass_salt', None))
-
-    def hash_password(self, password):
-        return hashlib.sha256(password.encode('utf-8') + self.pass_salt.encode('utf-8')).hexdigest()
-
